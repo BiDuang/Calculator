@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Calculator.ViewModels;assembly=Calculator"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:ic="using:FluentIcons.Avalonia"
+             xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
+             mc:Ignorable="d" d:DesignWidth="440" d:DesignHeight="500"
+             x:CompileBindings="False"
+             x:Class="Calculator.Views.MainView">
+
+    <UserControl.DataContext>
+        <vm:MainViewViewModel />
+    </UserControl.DataContext>
+
+    <Grid RowDefinitions="1.5*,0.2*,1.5*,2.5*,*,0.3*,10*">
+        <Grid Grid.Row="0" ColumnDefinitions="0.2*,*,5*,*,0.1*,*,0.2*">
+            <ToggleButton Grid.Column="1" FontSize="25" HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Command="{Binding ChangeWindowKeepFrontCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization KeepFront}" />
+                </ToolTip.Tip>
+                <ic:SymbolIcon Symbol="ExpandUpRight" Margin="1" />
+            </ToggleButton>
+            <Button Grid.Column="3" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Command="{Binding GotoHistoryCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization History}" />
+                </ToolTip.Tip>
+                <ic:SymbolIcon Symbol="History" Margin="1" />
+            </Button>
+            <Button Grid.Column="5" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Command="{Binding GotoConfigCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization Settings}" />
+                </ToolTip.Tip>
+                <ic:SymbolIcon Symbol="Settings" Margin="1" />
+            </Button>
+        </Grid>
+        <Viewbox Grid.Row="2" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding TopText}" />
+        </Viewbox>
+        <Viewbox Grid.Row="3" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding BottomText}" />
+        </Viewbox>
+        <Grid Grid.Row="6" ColumnDefinitions="0.5*,5*,0.5*,5*,0.5*,5*,0.5*,5*,0.5*"
+              RowDefinitions="5*,0.5*,5*,0.5*,5*,0.5*,5*,0.5*,5*,0.5*,5*">
+            <Button Grid.Column="1" Grid.Row="0" FontSize="25" HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding CopyResultCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization CopyResult}" />
+                </ToolTip.Tip>
+                <ic:SymbolIcon Symbol="ClipboardPaste" />
+            </Button>
+            <Button Grid.Column="3" Grid.Row="0" x:Name="CeBtn" Content="CE" FontSize="20"
+                    HorizontalContentAlignment="Center" HotKey="Delete"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding CeCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization CE}" />
+                </ToolTip.Tip>
+            </Button>
+            <Button Grid.Column="5" Grid.Row="0" x:Name="ClrBtn" Content="C" FontSize="20"
+                    HorizontalContentAlignment="Center" HotKey="Escape"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding ClearCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization C}" />
+                </ToolTip.Tip>
+            </Button>
+            <Button Grid.Column="7" Grid.Row="0" x:Name="BkSpBtn" FontSize="28" HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding BackspaceCommand}">
+                <ToolTip.Tip>
+                    <TextBlock Text="{i18N:ReactiveUiLocalization Backspace}" />
+                </ToolTip.Tip>
+                <ic:SymbolIcon Symbol="Backspace" />
+            </Button>
+            <Button Grid.Column="1" Grid.Row="2" x:Name="RecBtn" Content="1/x" FontSize="20"
+                    HorizontalContentAlignment="Center" HotKey="F6"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding ReciprocalCommand}" />
+            <Button Grid.Column="3" Grid.Row="2" x:Name="SqrBtn" Content="x²" FontSize="20"
+                    HorizontalContentAlignment="Center" HotKey="F7"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding SquareCommand}" />
+            <Button Grid.Column="5" Grid.Row="2" x:Name="SqRtBtn" Content="√x" FontSize="20"
+                    HorizontalContentAlignment="Center" HotKey="F8"
+                    VerticalContentAlignment="Center" Opacity="0.6" Command="{Binding SquareRootCommand}" />
+            <Button Grid.Column="7" Grid.Row="2" x:Name="DivBtn" Content="÷" Command="{Binding OperatorCommand}"
+                    Opacity="0.6" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Button.CommandParameter>
+                    <sys:Int32>3</sys:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="4" x:Name="Btn7" Content="7" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="7" />
+            <Button Grid.Column="3" Grid.Row="4" x:Name="Btn8" Content="8" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="8" />
+            <Button Grid.Column="5" Grid.Row="4" x:Name="Btn9" Content="9" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="9" />
+            <Button Grid.Column="7" Grid.Row="4" x:Name="MultBtn" Content="×" Command="{Binding OperatorCommand}"
+                    HotKey="OemComma"
+                    Opacity="0.6" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Button.CommandParameter>
+                    <sys:Int32>2</sys:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="6" x:Name="Btn4" Content="4" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="4" />
+            <Button Grid.Column="3" Grid.Row="6" x:Name="Btn5" Content="5" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="5" />
+            <Button Grid.Column="5" Grid.Row="6" x:Name="Btn6" Content="6" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="6" />
+            <Button Grid.Column="7" Grid.Row="6" x:Name="MinBtn" Content="-" Command="{Binding OperatorCommand}"
+                    Opacity="0.6" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Button.CommandParameter>
+                    <sys:Int32>1</sys:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="8" x:Name="Btn1" Content="1" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="1" />
+            <Button Grid.Column="3" Grid.Row="8" x:Name="Btn2" Content="2" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="2" />
+            <Button Grid.Column="5" Grid.Row="8" x:Name="Btn3" Content="3" FontSize="25"
+                    HorizontalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="3"
+                    VerticalContentAlignment="Center" />
+            <Button Grid.Column="7" Grid.Row="8" x:Name="AddBtn" Content="+" Command="{Binding OperatorCommand}"
+                    HotKey="OemPlus" Opacity="0.6" FontSize="25" HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                <Button.CommandParameter>
+                    <sys:Int32>0</sys:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="10" x:Name="PnBtn" Content="+/-" FontSize="20" HotKey="F9"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Command="{Binding PositiveNegativeCommand}" />
+            <Button Grid.Column="3" Grid.Row="10" x:Name="Btn0" Content="0" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="0" />
+            <Button Grid.Column="5" Grid.Row="10" x:Name="DotBtn" Content="." FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center" Command="{Binding NumberInputCommand}" CommandParameter="." />
+            <Button Grid.Column="7" Grid.Row="10" x:Name="EqlBtn" Content="=" FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    HotKey="Enter"
+                    VerticalContentAlignment="Center" Command="{Binding EqualCommand}" />
+        </Grid>
+    </Grid>
+
+</UserControl>

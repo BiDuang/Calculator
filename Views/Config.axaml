@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Calculator.ViewModels;assembly=Calculator"
+             xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
+             xmlns:ic="using:FluentIcons.Avalonia"
+             x:CompileBindings="False"
+             mc:Ignorable="d" d:DesignWidth="440" d:DesignHeight="500"
+             x:Class="Calculator.Views.Config">
+    <UserControl.DataContext>
+        <vm:ConfigViewModel />
+    </UserControl.DataContext>
+
+    <Grid ColumnDefinitions="*,6*,0.1*,*" RowDefinitions="1.5*,0.5*,2*,0.5*,2*,0.5*,10*">
+        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left">
+            <TextBlock Text="{i18N:ReactiveUiLocalization Config}" Margin="5" Padding="5,0,0,0" FontWeight="Bold" />
+        </Viewbox>
+        <Button Grid.Column="3" Grid.Row="0" FontSize="25" HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center" Command="{Binding GotoMainViewCommand}">
+            <ToolTip.Tip>
+                <TextBlock Text="{i18N:ReactiveUiLocalization BackIndex}" />
+            </ToolTip.Tip>
+            <ic:SymbolIcon Symbol="ArrowUpRight" />
+        </Button>
+        <Grid Grid.Column="1" Grid.Row="2" ColumnDefinitions="3*,0.5*,6*" VerticalAlignment="Center">
+            <TextBlock Grid.Column="0" Text="{i18N:ReactiveUiLocalization AppTheme}" VerticalAlignment="Center" />
+            <ComboBox Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Themes}" SelectedItem="{Binding CurrentTheme}" />
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="4" ColumnDefinitions="3*,0.5*,6*" VerticalAlignment="Center">
+            <TextBlock Grid.Column="0" Text="{i18N:ReactiveUiLocalization AppLang}" VerticalAlignment="Center" />
+            <ComboBox Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Languages}" SelectedItem="{Binding CurrentLanguage}" />
+        </Grid>
+    </Grid>
+</UserControl>

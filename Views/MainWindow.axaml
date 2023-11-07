@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Calculator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="using:Calculator.Views"
+        mc:Ignorable="d" d:DesignWidth="440" d:DesignHeight="500"
+        Width="350" Height="460" MinWidth="350" MinHeight="460"
+        x:Class="Calculator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Calculator"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True">
+
+    <ThemeVariantScope RequestedThemeVariant="{Binding CurrentTheme}">
+        <Panel>
+            <ExperimentalAcrylicBorder>
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial BackgroundSource="Digger" TintOpacity="1" MaterialOpacity="0.65"
+                                                 TintColor="{Binding BaseColor}" />
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+            <Grid ColumnDefinitions="*,50*,*" RowDefinitions="1.8*,25*,0.5*">
+                <TransitioningContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentContent}"
+                                             PageTransition="{Binding Transition}" />
+            </Grid>
+        </Panel>
+    </ThemeVariantScope>
+
+</Window>

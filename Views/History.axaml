@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Calculator.ViewModels;assembly=Calculator"
+             xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
+             xmlns:ic="using:FluentIcons.Avalonia"
+             x:CompileBindings="False"
+             mc:Ignorable="d" d:DesignWidth="440" d:DesignHeight="500"
+             x:Class="Calculator.Views.History">
+    <UserControl.DataContext>
+        <vm:HistoryViewModel />
+    </UserControl.DataContext>
+
+    <Grid ColumnDefinitions="*,6*,0.1*,*" RowDefinitions="1.5*,0.5*,12.5*,0.5*,1.5*">
+        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left">
+            <TextBlock Text="{i18N:ReactiveUiLocalization HistoryTitle}" Margin="5" Padding="5,0,0,0" FontWeight="Bold" />
+        </Viewbox>
+        <Button Grid.Column="3" Grid.Row="0" FontSize="25" HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center" Command="{Binding GotoMainViewCommand}">
+            <ToolTip.Tip>
+                <TextBlock Text="{i18N:ReactiveUiLocalization BackIndex}" />
+            </ToolTip.Tip>
+            <ic:SymbolIcon Symbol="ArrowUpRight" />
+        </Button>
+        <ListBox Grid.Column="0" Grid.ColumnSpan="4" Margin="15" Grid.Row="2" ItemsSource="{Binding HistoryList}"
+                 Opacity="0.7">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Panel Height="35">
+                        <Viewbox Margin="5">
+                            <TextBlock Text="{Binding}" />
+                        </Viewbox>
+                    </Panel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
